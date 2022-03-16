@@ -21,7 +21,7 @@ regions_selected = st.multiselect(
 )
 
 if len(regions_selected) > 0:
-    st.subheader("Table cars with filters")
+    st.subheader("Table cars filtered")
     df_filtered = df_cars[df_cars['continent'].isin(regions_selected)]
 else:
     st.subheader("Table cars")
