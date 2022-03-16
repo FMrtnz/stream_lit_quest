@@ -2,6 +2,7 @@
 import streamlit as st
 import pandas as pd
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 # Set a title to the page
 st.title('WCS Challenge : Cars analyse')
@@ -61,5 +62,14 @@ st.subheader("Correlation")
 # We replace plt.show() by st.pyplot()
 st.pyplot(viz_correlation.figure)
 
-
-# Should be delete columns or rows with less than 10% of available datas.
+df_crr = df_filtered.corr()
+for col in df_crr.columns:
+    fig, ax = plt.subplots(figsize = (13,10))
+    i = 1
+    for row in df_crr[col].index.values:
+        if (df_crr.loc[row, col] > .5 or df_crr.loc[row, col] < -.5) and (int(df_crr.loc[row, col]) != 1):
+            plt.subplot(i,1,1).scatter(x = df_filtered[row], y = df_filtered[col])
+            plt.xlabel(col)
+            plt.ylabel(row)
+            i += 1
+    st.pyplot(fig)
