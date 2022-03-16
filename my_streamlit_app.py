@@ -19,19 +19,19 @@ with st.container():
     # Set an input to choose region
     regions_selected = st.multiselect(
      'Filter by region(s) available in Dataframe',
-     regions_list,
      regions_list
     )
 
-    df_filtered = df_cars[df_cars['continent'].isin(regions_selected)]
-    df_filtered
+    if len(regions_selected) > 0:
+        df_filtered = df_cars[df_cars['continent'].isin(regions_selected)]
+    else:
+        df_filtered = df_cars
 
-# set a chart
-#st.line_chart(df_weather['MAX_TEMPERATURE_C'])
+    df_filtered
 
 with st.container():
     # Set correlation then see the chart with
-    viz_correlation = sns.heatmap(df_cars.corr(),
+    viz_correlation = sns.heatmap(df_filtered.corr(),
 								center=0,
 								cmap = sns.color_palette("vlag", as_cmap=True)
 								)
