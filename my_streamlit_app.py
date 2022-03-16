@@ -70,6 +70,6 @@ for col in df_crr.columns:
         if (df_crr.loc[row, col] > .5 or df_crr.loc[row, col] < -.5) and (int(df_crr.loc[row, col]) != 1):
             fig, ax = plt.subplots(figsize = (13,10))
             plt.subplot(1,1,1).scatter(x = df_filtered[row], y = df_filtered[col])
-            plt.xlabel(col)
-            plt.ylabel(row)
+            plt.xlabel(row)
+            plt.ylabel(col)
             st.pyplot(fig)
