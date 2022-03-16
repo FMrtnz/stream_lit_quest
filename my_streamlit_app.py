@@ -63,13 +63,13 @@ st.subheader("Correlation")
 st.pyplot(viz_correlation.figure)
 
 df_crr = df_filtered.corr()
+df_crr
 for col in df_crr.columns:
     fig, ax = plt.subplots(figsize = (13,10))
-    i = 1
     for row in df_crr[col].index.values:
         if (df_crr.loc[row, col] > .5 or df_crr.loc[row, col] < -.5) and (int(df_crr.loc[row, col]) != 1):
-            plt.subplot(i,1,1).scatter(x = df_filtered[row], y = df_filtered[col])
+            fig, ax = plt.subplots(figsize = (13,10))
+            plt.subplot(1,1,1).scatter(x = df_filtered[row], y = df_filtered[col])
             plt.xlabel(col)
             plt.ylabel(row)
-            i += 1
-    st.pyplot(fig)
+            st.pyplot(fig)
