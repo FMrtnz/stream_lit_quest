@@ -13,14 +13,18 @@ with st.container():
     # READ the CSV link with pandas then display
     df_cars = pd.read_csv(link)
 
+    # Set the available country
     regions_list = df_cars.groupby(["continent"]).count().index.values
 
     # Set an input to choose region
-    options = st.multiselect(
-     'By region(s) (US / Europe / Japan)',
+    regions_selected = st.multiselect(
+     'Filter by region(s) available in Dataframe',
+     regions_list,
      regions_list
     )
-    df_cars
+
+    df_filtered = df_cars[df_cars['continent'].isin(regions_selected)]
+    df_filtered
 
 # set a chart
 #st.line_chart(df_weather['MAX_TEMPERATURE_C'])
