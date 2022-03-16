@@ -21,8 +21,10 @@ regions_selected = st.multiselect(
 )
 
 if len(regions_selected) > 0:
+    st.subheader("Table cars with filters")
     df_filtered = df_cars[df_cars['continent'].isin(regions_selected)]
 else:
+    st.subheader("Table cars")
     df_filtered = df_cars
 
 df_filtered
@@ -32,10 +34,9 @@ viz_correlation = sns.heatmap(df_filtered.corr(),
 							center=0,
 							cmap = sns.color_palette("vlag", as_cmap=True)
 							)
+
+st.subheader("Correlation")
 # We replace plt.show() by st.pyplot()
 st.pyplot(viz_correlation.figure)
 
-# Set an input
-# name = st.text_input("Please give me your name:")
-# name_length = len(name)
-# st.write("Your name has ",name_length, "characters")
+df_filtered.describe()
