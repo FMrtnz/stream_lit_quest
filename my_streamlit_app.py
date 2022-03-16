@@ -48,7 +48,7 @@ if(df_filtered.isnull().sum().sum() > 0):
     st.write(df_filtered.isnull().sum())
     st.write('Total rows', len(df_filtered.index) )
     st.write('Total columns', len(df_filtered.columns) )
-else
+else:
     st.write("No NaN found in the table")
     st.write('Total rows', len(df_filtered.index) )
     st.write('Total columns', len(df_filtered.columns) )
