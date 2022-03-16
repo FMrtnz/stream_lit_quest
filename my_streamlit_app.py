@@ -3,40 +3,37 @@ import streamlit as st
 import pandas as pd
 import seaborn as sns
 
-# Set a container
-with st.container():
-    # Set a title to the page
-    st.title('WCS Challenge : Cars analyse')
+# Set a title to the page
+st.title('WCS Challenge : Cars analyse')
 
-    # Get the CSV link
-    link = "https://raw.githubusercontent.com/murpi/wilddata/master/quests/cars.csv"
-    # READ the CSV link with pandas then display
-    df_cars = pd.read_csv(link)
+# Get the CSV link
+link = "https://raw.githubusercontent.com/murpi/wilddata/master/quests/cars.csv"
+# READ the CSV link with pandas then display
+df_cars = pd.read_csv(link)
 
-    # Set the available country
-    regions_list = df_cars.groupby(["continent"]).count().index.values
+# Set the available country
+regions_list = df_cars.groupby(["continent"]).count().index.values
 
-    # Set an input to choose region
-    regions_selected = st.multiselect(
-     'Filter by region(s) available in Dataframe',
-     regions_list
-    )
+# Set an input to choose region
+regions_selected = st.multiselect(
+ 'Filter by region(s) available in Dataframe',
+ regions_list
+)
 
-    if len(regions_selected) > 0:
-        df_filtered = df_cars[df_cars['continent'].isin(regions_selected)]
-    else:
-        df_filtered = df_cars
+if len(regions_selected) > 0:
+    df_filtered = df_cars[df_cars['continent'].isin(regions_selected)]
+else:
+    df_filtered = df_cars
 
-    df_filtered
+df_filtered
 
-with st.container():
-    # Set correlation then see the chart with
-    viz_correlation = sns.heatmap(df_filtered.corr(),
-								center=0,
-								cmap = sns.color_palette("vlag", as_cmap=True)
-								)
-    # We replace plt.show() by st.pyplot()
-    st.pyplot(viz_correlation.figure)
+# Set correlation then see the chart with
+viz_correlation = sns.heatmap(df_filtered.corr(),
+							center=0,
+							cmap = sns.color_palette("vlag", as_cmap=True)
+							)
+# We replace plt.show() by st.pyplot()
+st.pyplot(viz_correlation.figure)
 
 # Set an input
 # name = st.text_input("Please give me your name:")
