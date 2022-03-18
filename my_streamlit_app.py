@@ -40,6 +40,13 @@ else:
 
 df_filtered
 
+st.subheader("Columns description")
+st.markdown('MPG (Mille per Gallon): Describe how many milles a car cans do per gallon')
+st.markdown('Cylinders (number in the car): The number of the cylinders defines the power of the car.')
+st.markdown("Cubicinches: Unity of Motor's volume")
+st.markdown("Hp (Horse power): Unity of Motor's power ")
+st.markdown("Weightlbs: Car's weight in Pound")
+st.markdown('time-to-60: Time to arrive at 60 milles per hour')
 # Set correlation then see the chart with
 viz_correlation = sns.heatmap(df_filtered.corr(),
 							center=0,
@@ -113,9 +120,11 @@ for col in cols_4:
 #Loop to create plot with x-axis year
 cols_5 = ["mpg","time-to-60"]
 x_axis = "year"
+df_means = df_filtered.groupby(['continent', x_axis], as_index=False).mean()
+
 for col in cols_5:
-    fig, ax = plt.subplots()
-    for region in labels_countries:
-        df_filtered[df_filtered['continent'] == region].plot(kind="scatter",ax = ax, x=x_axis, y=col, ylabel=col, figsize= (10, 3), color = colors[region])
-    ax.legend(labels_countries)
-    st.pyplot(fig)
+  fig, ax = plt.subplots()
+  for region in labels_countries:
+      df_means[df_means['continent'] == region].plot(kind="line",ax = ax, x=x_axis, y=col, ylabel=col, figsize= (10, 3), color = colors[region])
+  ax.legend(labels_countries)
+  st.pyplot(fig)
