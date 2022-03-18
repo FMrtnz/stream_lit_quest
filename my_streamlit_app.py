@@ -96,6 +96,17 @@ def loop_plot_scatter(x_axis, y_axis_cols):
         ax.legend(labels_countries)
         st.pyplot(fig)
 
+def loop_plot_box(x_axis, y_axis_cols):
+    for col in y_axis_cols:
+        fig, ax = plt.subplots()
+        for region in labels_countries:
+            df_filtered[df_filtered['continent'] == region].copy().plot(kind="box",\
+            ax = ax, \
+            x=x_axis, y=col, ylabel=col, figsize= (10, 3), \
+            color = colors[region])
+        ax.legend(labels_countries)
+        st.pyplot(fig)
+
 #Loop to create plot with mpg as x-axis
 #Define list of plot to create
 cols = ["cubicinches","hp","weightlbs","time-to-60"]
@@ -107,10 +118,21 @@ cols_2 = ["mpg", "cubicinches", "hp","weightlbs","time-to-60"]
 x_axis="cylinders"
 loop_plot_scatter(x_axis, cols_2)
 
+# test = pd.pivot_table(df_cylinders, columns="continent")
+# st.write()
+#
+for col in cols_2:
+  fig, ax = plt.subplots()
+  #for region in labels_countries:
+  df_filtered.copy().groupby(['continent', x_axis])[col].count().unstack(level=0).plot(kind="bar",ax = ax, rot=0, figsize= (10, 3))
+  #ax.legend(labels_countries)
+  st.pyplot(fig)
+
+
 #Loop to create plot with x-axis cubicinches
 cols_3 = ["hp","weightlbs","time-to-60"]
 x_axis = "cubicinches"
-loop_plot_scatter(x_axis, cols_3)
+#loop_plot_box(x_axis, cols_3)
 
 #Loop to create plot with x-axis hp
 cols_4 = ["weightlbs","time-to-60"]
