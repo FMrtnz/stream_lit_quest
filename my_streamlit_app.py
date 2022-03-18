@@ -67,7 +67,8 @@ st.write(df_filtered.describe())
 st.subheader("Correlation")
 
 # Set correlation then see the chart with
-viz_correlation = sns.heatmap(df_filtered.corr(),
+viz_correlation = sns.heatmap(
+                            df_filtered.corr(),
 							center=0,
 							cmap = sns.color_palette("vlag", as_cmap=True)
 							)
@@ -93,36 +94,36 @@ def loop_plot_scatter(x_axis, y_axis_cols):
             color = colors[region])
         ax.legend(labels_countries)
         st.pyplot(fig)
-        
+
 #Loop to create plot with mpg as x-axis
 #Define list of plot to create
 cols = ["cubicinches","hp","weightlbs","time-to-60"]
 x_axis="mpg"
 loop_plot_scatter(x_axis, cols)
-#
-# #Loop to create plot with x-axis cylinders
-# cols_2 = ["mpg", "cubicinches", "hp","weightlbs","time-to-60"]
-# x_axis="cylinders"
-# loop_plot_scatter(x_axis, cols_2)
-#
-# #Loop to create plot with x-axis cubicinches
-# cols_3 = ["hp","weightlbs","time-to-60"]
-# x_axis = "cubicinches"
-# loop_plot_scatter(x_axis, cols_3)
-#
-# #Loop to create plot with x-axis hp
-# cols_4 = ["weightlbs","time-to-60"]
-# x_axis = "hp"
-# loop_plot_scatter(x_axis, cols_4)
-#
-# #Loop to create plot with x-axis year
-# cols_5 = ["mpg","time-to-60"]
-# x_axis = "year"
-# df_means = df_filtered.groupby(['continent', x_axis], as_index=False).mean()
-#
-# for col in cols_5:
-#   fig, ax = plt.subplots()
-#   for region in labels_countries:
-#       df_means[df_means['continent'] == region].plot(kind="line",ax = ax, x=x_axis, y=col, ylabel=col, figsize= (10, 3), color = colors[region])
-#   ax.legend(labels_countries)
-#   st.pyplot(fig)
+
+#Loop to create plot with x-axis cylinders
+cols_2 = ["mpg", "cubicinches", "hp","weightlbs","time-to-60"]
+x_axis="cylinders"
+loop_plot_scatter(x_axis, cols_2)
+
+#Loop to create plot with x-axis cubicinches
+cols_3 = ["hp","weightlbs","time-to-60"]
+x_axis = "cubicinches"
+loop_plot_scatter(x_axis, cols_3)
+
+#Loop to create plot with x-axis hp
+cols_4 = ["weightlbs","time-to-60"]
+x_axis = "hp"
+loop_plot_scatter(x_axis, cols_4)
+
+#Loop to create plot with x-axis year
+cols_5 = ["mpg","time-to-60"]
+x_axis = "year"
+df_means = df_filtered.copy().groupby(['continent', x_axis], as_index=False).mean()
+
+for col in cols_5:
+  fig, ax = plt.subplots()
+  for region in labels_countries:
+      df_means[df_means['continent'] == region].plot(kind="line",ax = ax, x=x_axis, y=col, ylabel=col, figsize= (10, 3), color = colors[region])
+  ax.legend(labels_countries)
+  st.pyplot(fig)
