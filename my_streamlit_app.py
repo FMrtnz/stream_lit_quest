@@ -78,21 +78,21 @@ st.pyplot(viz_correlation.figure)
 colors = {regions_list[0]: "red" , regions_list[1]:"orange", regions_list[2]:"green"}
 
 # define a function to create differents plots scatter
-# def loop_plot_scatter(x_axis, y_axis_cols):
-#     for col in y_axis_cols:
-#         fig, ax = plt.subplots()
-#         for region in labels_countries:
-#             # Select the region for each axe
-#             # Use plot function from panda to set | kind is a param to set plot type
-#             df_filtered[df_filtered['continent'] == region].plot(kind="scatter",\
-#             # ax allows us to association to a fig position\
-#             ax = ax, \
-#             # Setting X and Y axis\
-#             x=x_axis, y=col, ylabel=col, figsize= (10, 3), \
-#             # Define color for axe with the color list created \
-#             color = colors[region])
-#         ax.legend(labels_countries)
-#         st.pyplot(fig)
+def loop_plot_scatter(x_axis, y_axis_cols):
+    for col in y_axis_cols:
+        fig, ax = plt.subplots()
+        for region in labels_countries:
+            # Select the region for each axe
+            # Use plot function from panda to set | kind is a param to set plot type
+            df_filtered[df_filtered['continent'] == region].copy().plot(kind="scatter",\
+            # ax allows us to association to a fig position\
+            ax = ax, \
+            # Setting X and Y axis\
+            x=x_axis, y=col, ylabel=col, figsize= (10, 3), \
+            # Define color for axe with the color list created \
+            color = colors[region])
+        ax.legend(labels_countries)
+        st.pyplot(fig)
 #
 # #Loop to create plot with mpg as x-axis
 # #Define list of plot to create
