@@ -30,9 +30,13 @@ regions_selected = st.multiselect(
 
 st.subheader("Table cars")
 if len(regions_selected) > 0:
+    # Adaptative variable for plots
+    labels_countries = regions_selected
+    # Adaptative DataFrame
     df_filtered = df_cars[df_cars['continent'].isin(regions_selected)]
 else:
     df_filtered = df_cars
+    labels_countries = regions_list
 
 df_filtered
 
@@ -62,14 +66,56 @@ st.subheader("Correlation")
 # We replace plt.show() by st.pyplot()
 st.pyplot(viz_correlation.figure)
 
-df_crr = df_filtered.corr()
-df_crr
-for col in df_crr.columns:
-    fig, ax = plt.subplots(figsize = (13,10))
-    for row in df_crr[col].index.values:
-        if (df_crr.loc[row, col] > .5 or df_crr.loc[row, col] < -.5) and (int(df_crr.loc[row, col]) != 1):
-            fig, ax = plt.subplots(figsize = (13,10))
-            plt.subplot(1,1,1).scatter(x = df_filtered[row], y = df_filtered[col])
-            plt.xlabel(row)
-            plt.ylabel(col)
-            st.pyplot(fig)
+# Set list of colors for each country
+colors = {regions_list[0]: "red" , regions_list[1]:"orange", regions_list[2]:"green"}
+
+#Loop to create plot with mpg as x-axis
+#Define list of plot to create
+cols = ["cubicinches","hp","weightlbs","time-to-60"]
+x_axis="mpg"
+for col in cols:
+    fig, ax = plt.subplots()
+    for region in labels_countries:
+        df_filtered[df_filtered['continent'] == region].plot(kind="scatter",ax = ax, x=x_axis, y=col, ylabel=col, figsize= (10, 3), color = colors[region])
+    ax.legend(labels_countries)
+    st.pyplot(fig)
+
+#Loop to create plot with x-axis cylinders
+cols_2 = ["mpg", "cubicinches", "hp","weightlbs","time-to-60"]
+x_axis="cylinders"
+for col in cols_2:
+    fig, ax = plt.subplots()
+    for region in labels_countries:
+        df_filtered[df_filtered['continent'] == region].plot(kind="scatter",ax = ax, x=x_axis, y=col, ylabel=col, figsize= (10, 3), color = colors[region])
+    ax.legend(labels_countries)
+    st.pyplot(fig)
+
+#Loop to create plot with x-axis cubicinches
+cols_3 = ["hp","weightlbs","time-to-60"]
+x_axis = "cubicinches"
+for col in cols_3:
+    fig, ax = plt.subplots()
+    for region in labels_countries:
+        df_filtered[df_filtered['continent'] == region].plot(kind="scatter",ax = ax, x=x_axis, y=col, ylabel=col, figsize= (10, 3), color = colors[region])
+    ax.legend(labels_countries)
+    st.pyplot(fig)
+
+#Loop to create plot with x-axis hp
+cols_4 = ["weightlbs","time-to-60"]
+x_axis = "hp"
+for col in cols_4:
+    fig, ax = plt.subplots()
+    for region in labels_countries:
+        df_filtered[df_filtered['continent'] == region].plot(kind="scatter",ax = ax, x=x_axis, y=col, ylabel=col, figsize= (10, 3), color = colors[region])
+    ax.legend(labels_countries)
+    st.pyplot(fig)
+
+#Loop to create plot with x-axis year
+cols_5 = ["mpg","time-to-60"]
+x_axis = "year"
+for col in cols_5:
+    fig, ax = plt.subplots()
+    for region in labels_countries:
+        df_filtered[df_filtered['continent'] == region].plot(kind="scatter",ax = ax, x=x_axis, y=col, ylabel=col, figsize= (10, 3), color = colors[region])
+    ax.legend(labels_countries)
+    st.pyplot(fig)
