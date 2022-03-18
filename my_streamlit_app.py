@@ -47,11 +47,6 @@ st.markdown("Cubicinches: Unity of Motor's volume")
 st.markdown("Hp (Horse power): Unity of Motor's power ")
 st.markdown("Weightlbs: Car's weight in Pound")
 st.markdown('time-to-60: Time to arrive at 60 milles per hour')
-# Set correlation then see the chart with
-viz_correlation = sns.heatmap(df_filtered.corr(),
-							center=0,
-							cmap = sns.color_palette("vlag", as_cmap=True)
-							)
 
 # st.write is like a print function of python tyo display results
 st.subheader("NaN elements")
@@ -70,6 +65,12 @@ st.subheader("Statistics' observations")
 st.write(df_filtered.describe())
 
 st.subheader("Correlation")
+
+# Set correlation then see the chart with
+viz_correlation = sns.heatmap(df_filtered.corr(),
+							center=0,
+							cmap = sns.color_palette("vlag", as_cmap=True)
+							)
 # We replace plt.show() by st.pyplot()
 st.pyplot(viz_correlation.figure)
 
