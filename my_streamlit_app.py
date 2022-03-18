@@ -73,7 +73,7 @@ viz_correlation = sns.heatmap(
 							cmap = sns.color_palette("vlag", as_cmap=True)
 							)
 # We replace plt.show() by st.pyplot()
-st.pyplot(viz_correlation.figure)
+st.pyplot(viz_correlation.figure, clear_figure=True)
 
 # Set list of colors for each country
 colors = {regions_list[0]: "red" , regions_list[1]:"orange", regions_list[2]:"green"}
@@ -93,7 +93,7 @@ def loop_plot_scatter(x_axis, y_axis_cols):
             # Define color for axe with the color list created \
             color = colors[region])
         ax.legend(labels_countries)
-        st.pyplot(fig)
+        st.pyplot(fig, clear_figure=True)
 
 #Loop to create plot with mpg as x-axis
 #Define list of plot to create
@@ -126,4 +126,4 @@ for col in cols_5:
   for region in labels_countries:
       df_means[df_means['continent'] == region].plot(kind="line",ax = ax, x=x_axis, y=col, ylabel=col, figsize= (10, 3), color = colors[region])
   ax.legend(labels_countries)
-  st.pyplot(fig)
+  st.pyplot(fig, clear_figure=True)
