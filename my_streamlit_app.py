@@ -82,9 +82,8 @@ def loop_plot_scatter(x_axis, y_axis_cols):
         fig, ax = plt.subplots()
         for region in labels_countries:
             # Select the region for each axe
-            df_filtered[df_filtered['continent'] == region]\
-            # Use plot function from panda to set | kind is a param to set plot type \
-            .plot(kind="scatter",\
+            # Use plot function from panda to set | kind is a param to set plot type
+            df_filtered[df_filtered['continent'] == region].plot(kind="scatter",\
             # ax allows us to association to a fig position\
             ax = ax, \
             # Setting X and Y axis\
