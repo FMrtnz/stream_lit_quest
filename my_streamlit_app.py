@@ -93,12 +93,12 @@ def loop_plot_scatter(x_axis, y_axis_cols):
             color = colors[region])
         ax.legend(labels_countries)
         st.pyplot(fig)
-#
-# #Loop to create plot with mpg as x-axis
-# #Define list of plot to create
-# cols = ["cubicinches","hp","weightlbs","time-to-60"]
-# x_axis="mpg"
-# loop_plot_scatter(x_axis, cols)
+        
+#Loop to create plot with mpg as x-axis
+#Define list of plot to create
+cols = ["cubicinches","hp","weightlbs","time-to-60"]
+x_axis="mpg"
+loop_plot_scatter(x_axis, cols)
 #
 # #Loop to create plot with x-axis cylinders
 # cols_2 = ["mpg", "cubicinches", "hp","weightlbs","time-to-60"]
