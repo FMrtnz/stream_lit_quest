@@ -118,7 +118,7 @@ loop_plot_scatter(x_axis, cols_4)
 #Loop to create plot with x-axis year
 cols_5 = ["mpg","time-to-60"]
 x_axis = "year"
-df_means = df_filtered.groupby(['continent', x_axis], as_index=False).mean()
+df_means = df_filtered.groupby(['continent', x_axis], as_index=False).mean().copy()
 
 for col in cols_5:
   fig, ax = plt.subplots()
