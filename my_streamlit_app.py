@@ -67,6 +67,7 @@ st.write(df_filtered.describe())
 st.subheader("Correlation")
 
 # Set correlation then see the chart with
+fig, ax = plt.subplots()
 viz_correlation = sns.heatmap(
                             df_filtered.corr(),
 							center=0,
@@ -93,7 +94,7 @@ def loop_plot_scatter(x_axis, y_axis_cols):
             # Define color for axe with the color list created \
             color = colors[region])
         ax.legend(labels_countries)
-        st.pyplot(fig, clear_figure=True)
+        st.pyplot(fig)
 
 #Loop to create plot with mpg as x-axis
 #Define list of plot to create
@@ -126,4 +127,4 @@ for col in cols_5:
   for region in labels_countries:
       df_means[df_means['continent'] == region].plot(kind="line",ax = ax, x=x_axis, y=col, ylabel=col, figsize= (10, 3), color = colors[region])
   ax.legend(labels_countries)
-  st.pyplot(fig, clear_figure=True)
+  st.pyplot(fig)
