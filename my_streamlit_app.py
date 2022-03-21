@@ -97,11 +97,14 @@ def loop_plot_scatter(x_axis, y_axis_cols):
         st.pyplot(fig)
 
 def loop_plot_box(x_axis, y_axis_cols):
+    fig = plt.figure(figsize=(10, 15))
+    i = 1
     for col in y_axis_cols:
-        fig, ax = plt.subplots()
+        ax = plt.subplot(2,2,i)
         df_filtered.boxplot(by=x_axis, column=col, ax=ax)
         ax.set( title = f"{col} vs {x_axis}" )
-        st.pyplot(fig)
+        i += 1
+    st.pyplot(fig)
 
 #Loop to create plot with mpg as x-axis
 #Define list of plot to create
@@ -126,8 +129,8 @@ for col in cols_2:
 
 
 #Loop to create plot with x-axis cubicinches
-cols_3 = ["hp","weightlbs","time-to-60"]
-x_axis = "cubicinches"
+cols_3 = ["cubicinches", "hp","weightlbs","time-to-60"]
+x_axis = "continent"
 loop_plot_box(x_axis, cols_3)
 
 #Loop to create plot with x-axis hp
